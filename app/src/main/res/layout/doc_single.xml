@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/txtDocTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Document Title"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_file"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:drawablePadding="10dp"
+        android:paddingStart="13dp"
+        android:paddingVertical="10dp"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
+
+</androidx.cardview.widget.CardView>

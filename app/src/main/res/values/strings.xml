@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ACM Omnia</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open" />
+    <string name="navigation_drawer_close" />
+    <string name="app_version">v1.0</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+    <string name="teams_info">At ACM JUIT we believe that every technology should be part of our community. We have a diverse array of teams under us all working and learning together. Working towards building a stronger community</string>
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="17dp"
+    android:layout_marginVertical="10dp"
+    app:cardBackgroundColor="#A30B37">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtQues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Question......?"
+            android:padding="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="8dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@android:color/white"/>
+
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:id="@+id/txtAns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:animAlphaStart="1"
+            app:expandDrawable="@drawable/ic_down_arrow"
+            app:maxCollapsedLines="2">
+
+            <TextView
+                android:id="@id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsum"
+                android:padding="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:background="@android:color/transparent"
+                android:padding="16dp" />
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
