@@ -16,4 +16,13 @@ The official android app for <a href="http://juit.acm.org/">ACM Student Chapter 
 
 PRs are most welcome!
 
-[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+[![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)     
+
+
+
+## Creators
+
+Made with <span style="font-size:130%;color:red;">&hearts;</span> by      
+* [Dev Tyagi](https://www.linkedin.com/in/devtyagi/)             (App Development)
+* [Kaustubh Mishra](https://www.linkedin.com/in/kaustubhai/)     (UI Design)
+* [Shreesh Tripathi](https://www.linkedin.com/in/shreesh-tripathi-a12977192/)     (UI Design)
