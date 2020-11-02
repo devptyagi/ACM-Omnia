@@ -11,6 +11,8 @@ The official android app for <a href="http://juit.acm.org/">ACM Student Chapter 
 
 <img src="https://firebasestorage.googleapis.com/v0/b/acm-omnia.appspot.com/o/appScreenshots%2Fss1.jpg?alt=media&token=7d83d465-2b56-4f9d-89c2-577518a400f5" width="600" height="395">
 
+<img src="https://firebasestorage.googleapis.com/v0/b/acm-omnia.appspot.com/o/appScreenshots%2Fss2.jpg?alt=media&token=e361eaf9-388e-4546-ab9f-5c22e2f0e895" width="600" height="395">
+
 
 ## Contributions
 
