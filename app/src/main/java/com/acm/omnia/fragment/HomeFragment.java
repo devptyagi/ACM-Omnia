@@ -31,6 +31,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.takusemba.multisnaprecyclerview.MultiSnapHelper;
+import com.takusemba.multisnaprecyclerview.SnapGravity;
 
 import java.util.ArrayList;
 
@@ -78,6 +80,8 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
                 shareApp();
             }
         });
+        MultiSnapHelper multiSnapHelper = new MultiSnapHelper(SnapGravity.START, 1, 100);
+        multiSnapHelper.attachToRecyclerView(recyclerView);
         setupToolbar();
         fetchData();
         setupLeaderBoard();
@@ -103,7 +107,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
-            String shareMessage= "Download ACM Omnia on Playstore:\n";
+            String shareMessage= "Download ACM Omnia\n";
             shareMessage = shareMessage + shareLink;
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "Share app: "));

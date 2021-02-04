@@ -45,7 +45,7 @@ public class ProjectsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         recyclerView = view.findViewById(R.id.recycler_projects);
-        layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(getActivity());
         drawerLayout = getActivity().findViewById(R.id.drawer_layout);
         toolbar = view.findViewById(R.id.toolBar);
         setupToolbar();
