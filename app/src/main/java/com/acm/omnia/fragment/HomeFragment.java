@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
-            String shareMessage= "Download ACM Omnia on Playstore:\n";
+            String shareMessage= "Download ACM Omnia\n";
             shareMessage = shareMessage + shareLink;
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "Share app: "));
