@@ -31,6 +31,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.takusemba.multisnaprecyclerview.MultiSnapHelper;
+import com.takusemba.multisnaprecyclerview.SnapGravity;
 
 import java.util.ArrayList;
 
@@ -78,6 +80,8 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
                 shareApp();
             }
         });
+        MultiSnapHelper multiSnapHelper = new MultiSnapHelper(SnapGravity.START, 1, 100);
+        multiSnapHelper.attachToRecyclerView(recyclerView);
         setupToolbar();
         fetchData();
         setupLeaderBoard();

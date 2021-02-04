@@ -8,10 +8,6 @@
     android:orientation="vertical"
     tools:context=".fragment.ProjectsFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,18 +43,16 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="40dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_projects"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="1"
-                android:layout_centerInParent="true"
                 tools:listitem="@layout/project_single"/>
 
         </RelativeLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>
