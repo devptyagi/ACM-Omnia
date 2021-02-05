@@ -66,6 +66,32 @@
                 android:paddingStart="30dp"
                 android:layout_marginTop="30dp"/>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardNoUpcomingEvent"
+                app:cardCornerRadius="20dp"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="10dp"
+                android:elevation="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:backgroundTint="#261B52"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:visibility="gone"
+                android:layout_height="80dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Upcoming Events"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center"
+                    android:textSize="24sp"
+                    android:layout_gravity="center_vertical"/>
+
+            </androidx.cardview.widget.CardView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_events"
                 android:layout_width="match_parent"

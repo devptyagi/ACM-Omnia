@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
                 shareApp();
             }
         });
-        MultiSnapHelper multiSnapHelper = new MultiSnapHelper(SnapGravity.START, 1, 100);
+        MultiSnapHelper multiSnapHelper = new MultiSnapHelper(SnapGravity.START, 1, 50);
         multiSnapHelper.attachToRecyclerView(recyclerView);
         setupToolbar();
         fetchData();
