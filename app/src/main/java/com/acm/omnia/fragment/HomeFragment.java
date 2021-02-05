@@ -53,6 +53,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
     RelativeLayout progressLayout;
     LinearLayout shareAppCard;
     String shareLink;
+    String shareMsg;
     TextView oneName, oneUserName, oneRating, twoName, twoUserName, twoRating, threeName, threeUserName, threeRating;
 
     @Override
@@ -96,6 +97,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()) {
+                            shareMsg = task.getResult().getString("shareTitle");
                            shareLink = task.getResult().getString("url");
                         }
                     }
@@ -107,7 +109,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "My application name");
-            String shareMessage= "Download ACM Omnia\n";
+            String shareMessage= shareMsg + "\n";
             shareMessage = shareMessage + shareLink;
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "Share app: "));
