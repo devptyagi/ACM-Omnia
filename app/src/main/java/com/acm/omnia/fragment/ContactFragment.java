@@ -95,7 +95,7 @@ public class ContactFragment extends Fragment {
     }
 
     private void openWhatsapp() {
-        String contact = "+91 9418033740";
+        String contact = "+91 7017428546";
         String url = "https://api.whatsapp.com/send?phone=" + contact;
         try {
             PackageManager pm = getContext().getPackageManager();

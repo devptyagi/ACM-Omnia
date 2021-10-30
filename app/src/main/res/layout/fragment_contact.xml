@@ -111,7 +111,7 @@
                 android:drawableStart="@drawable/call"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="center"
-                android:text="+91 94180 33740"
+                android:text="+91 7017428546"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
