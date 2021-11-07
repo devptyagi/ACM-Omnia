@@ -22,6 +22,7 @@ import com.acm.omnia.Model.PastEvent;
 import com.acm.omnia.R;
 import com.acm.omnia.adapter.EventAdapter;
 import com.acm.omnia.adapter.PastEventAdapter;
+import com.acm.omnia.databinding.FragmentEventsBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.EventListener;
@@ -40,34 +41,31 @@ public class EventsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    Toolbar toolbar;
+    FragmentEventsBinding binding;
+
+
     DrawerLayout drawerLayout;
-    CardView cardNoUpcomingEvent;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<Event> eventList = new ArrayList<>();
-    ArrayList<PastEvent> pastEventList = new ArrayList<>();
     EventAdapter eventRecyclerAdapter;
     PastEventAdapter pastEventRecyclerAdapter;
-    RecyclerView recyclerUpcomingEvents, recyclerPastEvents;
+    ArrayList<PastEvent> pastEventList = new ArrayList<>();
     RecyclerView.LayoutManager eventsLayoutManager, pastEventsLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        binding = FragmentEventsBinding.inflate(inflater, container, false);
         drawerLayout = getActivity().findViewById(R.id.drawer_layout);
-        toolbar = view.findViewById(R.id.toolBar);
-        cardNoUpcomingEvent = view.findViewById(R.id.cardNoUpcomingEvent);
-        cardNoUpcomingEvent.setVisibility(View.GONE);
+        binding.cardNoUpcomingEvent.setVisibility(View.GONE);
         setupToolbar();
-        recyclerUpcomingEvents = view.findViewById(R.id.recycler_events);
-        recyclerPastEvents = view.findViewById(R.id.recycler_past_events);
+
         eventsLayoutManager = new LinearLayoutManager(getActivity());
         pastEventsLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         MultiSnapHelper multiSnapHelper = new MultiSnapHelper(SnapGravity.START, 1, 50);
-        multiSnapHelper.attachToRecyclerView(recyclerPastEvents);
+        multiSnapHelper.attachToRecyclerView(binding.recyclerPastEvents);
         fetchEventData();
         fetchPastEventsData();
-        return view;
+        return binding.getRoot();
     }
 
     private void fetchPastEventsData() {
@@ -82,15 +80,15 @@ public class EventsFragment extends Fragment {
                                 pastEventList.add(e);
                             }
                             pastEventRecyclerAdapter = new PastEventAdapter(pastEventList);
-                            recyclerPastEvents.setAdapter(pastEventRecyclerAdapter);
-                            recyclerPastEvents.setLayoutManager(pastEventsLayoutManager);
+                            binding.recyclerPastEvents.setAdapter(pastEventRecyclerAdapter);
+                            binding.recyclerPastEvents.setLayoutManager(pastEventsLayoutManager);
                         }
                     }
                 });
     }
 
     private void setupToolbar() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(Color.parseColor("#FFFFFF"));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -107,13 +105,13 @@ public class EventsFragment extends Fragment {
                             eventList.add(e);
                         }
                         if(eventList.isEmpty()) {
-                            cardNoUpcomingEvent.setVisibility(View.VISIBLE);
+                            binding.cardNoUpcomingEvent.setVisibility(View.VISIBLE);
                         } else {
-                            cardNoUpcomingEvent.setVisibility(View.GONE);
+                            binding.cardNoUpcomingEvent.setVisibility(View.GONE);
                         }
                         eventRecyclerAdapter = new EventAdapter(eventList);
-                        recyclerUpcomingEvents.setAdapter(eventRecyclerAdapter);
-                        recyclerUpcomingEvents.setLayoutManager(eventsLayoutManager);
+                        binding.recyclerEvents.setAdapter(eventRecyclerAdapter);
+                        binding.recyclerEvents.setLayoutManager(eventsLayoutManager);
                     }
                 });
     }

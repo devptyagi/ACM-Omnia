@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.ActivityMainBinding;
 import com.acm.omnia.fragment.ContactFragment;
 import com.acm.omnia.fragment.CouncilFragment;
 import com.acm.omnia.fragment.EventsFragment;
@@ -22,19 +23,21 @@ import com.acm.omnia.fragment.TeamsFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+    ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViews();
-        setupDrawer();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+       // setupDrawer();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user.getPhotoUrl() != null) {
-            Picasso.get().load(user.getPhotoUrl()).into((ImageView) drawerLayout.findViewById(R.id.imgDrawerProfilePicture));
+            Picasso.get().load(user.getPhotoUrl()).into((ImageView) binding.drawerLayout.findViewById(R.id.imgDrawerProfilePicture));
         }
         super.onResume();
     }
@@ -51,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user.getPhotoUrl() != null) {
-            Picasso.get().load(user.getPhotoUrl()).into((ImageView) drawerLayout.findViewById(R.id.imgDrawerProfilePicture));
+            Picasso.get().load(user.getPhotoUrl()).into((ImageView) binding.drawerLayout.findViewById(R.id.imgDrawerProfilePicture));
         }
 
-        drawerLayout.findViewById(R.id.edit_profile).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, EditProfileActivity.class);
@@ -62,75 +65,72 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerHome).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).addToBackStack("Home").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerForum).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ForumFragment()).addToBackStack("Forum").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerEvent).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventsFragment()).addToBackStack("Events").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerCouncil).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CouncilFragment()).addToBackStack("Council").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerTeams).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TeamsFragment()).addToBackStack("Teams").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerContact).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ContactFragment()).addToBackStack("Contact").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerProjects).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProjectsFragment()).addToBackStack("Projects").commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
 
-        drawerLayout.findViewById(R.id.drawerLogout).setOnClickListener(new View.OnClickListener() {
+        binding.drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 confirmLogout();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
     }
 
-    private void findViews() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navView);
-    }
+
 
 
     private void confirmLogout() {
@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.ActivitySignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,54 +23,49 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText txtName, txtEmail, txtPass;
-    Button btnSignup;
-    TextView txtLogin;
+    ActivitySignupBinding binding;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-        txtName = findViewById(R.id.txtName);
-        txtEmail = findViewById(R.id.txtEmail);
-        txtPass = findViewById(R.id.txtPass);
-        txtLogin = findViewById(R.id.txtLogin);
-        progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
-        txtLogin.setOnClickListener(new View.OnClickListener() {
+        binding = ActivitySignupBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.progressBar.setVisibility(View.GONE);
+        binding.txtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
-        btnSignup = findViewById(R.id.btnSignup);
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnSignup.setClickable(false);
-                progressBar.setVisibility(View.VISIBLE);
+                binding.btnSignup.setClickable(false);
+                binding.progressBar.setVisibility(View.VISIBLE);
                 signUp();
             }
         });
     }
 
     private void clearTextFields() {
-        txtName.setText("");
-        txtEmail.setText("");
-        txtPass.setText("");
+        binding.txtName.setText("");
+        binding.txtEmail.setText("");
+        binding.txtPass.setText("");
     }
 
     private void signUp() {
-        final String name = txtName.getText().toString();
-        String email = txtEmail.getText().toString();
-        String pass = txtPass.getText().toString();
+        final String name = binding.txtName.getText().toString();
+        String email = binding.txtEmail.getText().toString();
+        String pass = binding.txtPass.getText().toString();
 
         if (name.isEmpty() || email.isEmpty() || pass.isEmpty()) {
             Toast.makeText(SignupActivity.this, "All fields are required!", Toast.LENGTH_SHORT).show();
-            btnSignup.setClickable(true);
+            binding.btnSignup.setClickable(true);
             clearTextFields();
             return;
         }
@@ -90,8 +86,8 @@ public class SignupActivity extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         } else {
-                            progressBar.setVisibility(View.GONE);
-                            btnSignup.setClickable(true);
+                            binding.progressBar.setVisibility(View.GONE);
+                            binding.btnSignup.setClickable(true);
                             clearTextFields();
                             Toast.makeText(SignupActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
                         }

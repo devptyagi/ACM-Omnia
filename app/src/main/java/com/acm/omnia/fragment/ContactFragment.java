@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.FragmentContactBinding;
 
 public class ContactFragment extends Fragment {
 
@@ -27,66 +28,59 @@ public class ContactFragment extends Fragment {
         // Required empty public constructor
     }
 
-    Toolbar toolbar;
+    FragmentContactBinding binding;
     DrawerLayout drawerLayout;
-    ImageView imgInsta, imgFacebook, imgYoutube, imgLinkedin, imgGithub, imgWhatsapp;
-    TextView txtWebsiteLink;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contact, container, false);
+       binding = FragmentContactBinding.inflate(inflater, container, false);
         drawerLayout = getActivity().findViewById(R.id.drawer_layout);
-        toolbar = view.findViewById(R.id.toolBar);
-        imgInsta = view.findViewById(R.id.contactInsta);
-        imgFacebook = view.findViewById(R.id.contactFacebook);
-        imgYoutube = view.findViewById(R.id.contactYoutube);
-        imgLinkedin = view.findViewById(R.id.contactLinkedin);
-        imgGithub = view.findViewById(R.id.contactGithub);
-        imgWhatsapp = view.findViewById(R.id.contactWhatsapp);
-        txtWebsiteLink = view.findViewById(R.id.txtWebsiteLink);
+
         setupLinks();
         setupToolbar();
-        return view;
+        return binding.getRoot();
     }
 
     private void setupLinks() {
-        imgInsta.setOnClickListener(new View.OnClickListener() {
+        binding.contactInsta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openInsta();
             }
         });
-        imgFacebook.setOnClickListener(new View.OnClickListener() {
+        binding.contactFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFacebook();
             }
         });
-        imgLinkedin.setOnClickListener(new View.OnClickListener() {
+        binding.contactLinkedin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openLinkedin();
             }
         });
-        imgYoutube.setOnClickListener(new View.OnClickListener() {
+        binding.contactYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openYoutube();
             }
         });
-        imgGithub.setOnClickListener(new View.OnClickListener() {
+        binding.contactGithub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openGithub();
             }
         });
-        imgWhatsapp.setOnClickListener(new View.OnClickListener() {
+        binding.contactWhatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openWhatsapp();
             }
         });
-        txtWebsiteLink.setOnClickListener(new View.OnClickListener() {
+        binding.txtWebsiteLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openAcmWebsite();
@@ -165,7 +159,7 @@ public class ContactFragment extends Fragment {
     }
 
     private void setupToolbar() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(Color.parseColor("#FFFFFF"));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();

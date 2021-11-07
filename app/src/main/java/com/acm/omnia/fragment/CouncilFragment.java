@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.FragmentCouncilBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,25 +28,20 @@ public class CouncilFragment extends Fragment {
         // Required empty public constructor
     }
 
-    Toolbar toolbar;
+    FragmentCouncilBinding binding;
+
     DrawerLayout drawerLayout;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ImageView imgChair, imgViceChair, imgSecretary, imgTreasurer, imgWebmaster, imgMemberChair;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_council, container, false);
+        binding = FragmentCouncilBinding.inflate(inflater, container, false);
         drawerLayout = getActivity().findViewById(R.id.drawer_layout);
-        toolbar = view.findViewById(R.id.toolBar);
-        imgChair = view.findViewById(R.id.imgChair);
-        imgViceChair = view.findViewById(R.id.imgViceChair);
-        imgSecretary = view.findViewById(R.id.imgSecretary);
-        imgTreasurer = view.findViewById(R.id.imgTreasurer);
-        imgWebmaster = view.findViewById(R.id.imgWebmaster);
-        imgMemberChair = view.findViewById(R.id.imgMemberChair);
+
         setupToolbar();
         setupCouncilImages();
-        return view;
+        return binding.getRoot();
     }
 
     private void setupCouncilImages() {
@@ -56,12 +52,12 @@ public class CouncilFragment extends Fragment {
                 if(task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()) {
-                        Picasso.get().load(document.getString("chairperson")).into(imgChair);
-                        Picasso.get().load(document.getString("viceChair")).into(imgViceChair);
-                        Picasso.get().load(document.getString("memberChair")).into(imgMemberChair);
-                        Picasso.get().load(document.getString("treasurer")).into(imgTreasurer);
-                        Picasso.get().load(document.getString("webmaster")).into(imgWebmaster);
-                        Picasso.get().load(document.getString("secretary")).into(imgSecretary);
+                        Picasso.get().load(document.getString("chairperson")).into(binding.imgChair);
+                        Picasso.get().load(document.getString("viceChair")).into(binding.imgViceChair);
+                        Picasso.get().load(document.getString("memberChair")).into(binding.imgMemberChair);
+                        Picasso.get().load(document.getString("treasurer")).into(binding.imgTreasurer);
+                        Picasso.get().load(document.getString("webmaster")).into(binding.imgWebmaster);
+                        Picasso.get().load(document.getString("secretary")).into(binding.imgSecretary);
                     }
                 }
             }
@@ -69,7 +65,7 @@ public class CouncilFragment extends Fragment {
     }
 
     private void setupToolbar() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(Color.parseColor("#FFFFFF"));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
