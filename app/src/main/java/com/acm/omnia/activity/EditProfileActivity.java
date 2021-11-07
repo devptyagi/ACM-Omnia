@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.ActivityEditProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,13 +46,11 @@ import java.util.HashMap;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    ActivityEditProfileBinding binding;
+
     private static final String TAG = "EditProfileActivity";
-    Toolbar toolbar;
-    EditText etUsername, etPhoneNumber, etEmail;
-    ImageView imgProfilePicture;
-    Button btnSaveChanges;
+
     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-    SwitchMaterial editSwitch;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView txtChangePassword;
     private int PICK_IMAGE = 10001;
@@ -60,29 +59,29 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupToolbar();
-        findViews();
         setupProfileData();
-        editSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.editSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
-                    btnSaveChanges.setEnabled(true);
-                    etPhoneNumber.setEnabled(true);
+                    binding.btnSaveChanges.setEnabled(true);
+                    binding.etPhoneNumber.setEnabled(true);
                 } else {
-                    btnSaveChanges.setEnabled(false);
-                    etPhoneNumber.setEnabled(false);
+                    binding.btnSaveChanges.setEnabled(false);
+                    binding.etPhoneNumber.setEnabled(false);
                 }
             }
         });
-        btnSaveChanges.setOnClickListener(new View.OnClickListener() {
+        binding.btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateUserProfile();
             }
         });
-        imgProfilePicture.setOnClickListener(new View.OnClickListener() {
+        binding.imgProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkPermissions();
@@ -183,7 +182,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void setProfilePicture(Uri uri) {
-        Picasso.get().load(uri).into(imgProfilePicture);
+        Picasso.get().load(uri).into(binding.imgProfilePicture);
         UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
                 .setPhotoUri(uri)
                 .build();
@@ -210,7 +209,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String userName = currentUser.getDisplayName();
         String userEmail = currentUser.getEmail();
         if(currentUser.getPhotoUrl() != null) {
-            Picasso.get().load(currentUser.getPhotoUrl()).into(imgProfilePicture);
+            Picasso.get().load(currentUser.getPhotoUrl()).into(binding.imgProfilePicture);
         }
         db.collection("users").document(currentUser.getUid())
                 .get()
@@ -221,10 +220,10 @@ public class EditProfileActivity extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if(document.exists()) {
                                 String phoneNumber = document.getString("phone");
-                                etPhoneNumber.setText(phoneNumber);
+                                binding.etPhoneNumber.setText(phoneNumber);
                             } else {
-                                etPhoneNumber.setText("");
-                                etPhoneNumber.setHint("Add phone number");
+                                binding.etPhoneNumber.setText("");
+                                binding.etPhoneNumber.setHint("Add phone number");
                             }
                         }
                     }
@@ -232,15 +231,15 @@ public class EditProfileActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        etPhoneNumber.setHint("Add phone number");
+                        binding.etPhoneNumber.setHint("Add phone number");
                     }
                 });
-        etUsername.setText(userName);
-        etEmail.setText(userEmail);
+        binding.etUserName.setText(userName);
+        binding.etEmail.setText(userEmail);
     }
 
     private void updateUserProfile() {
-        final String phoneNumber = etPhoneNumber.getText().toString();
+        final String phoneNumber = binding.etPhoneNumber.getText().toString();
         if(phoneNumber.length() != 10) {
             makeToast("Enter a valid phone number");
             return;
@@ -257,19 +256,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
     }
 
-    private void findViews() {
-        editSwitch = findViewById(R.id.editSwitch);
-        imgProfilePicture = findViewById(R.id.imgProfilePicture);
-        etUsername = findViewById(R.id.etUserName);
-        etPhoneNumber = findViewById(R.id.etPhoneNumber);
-        etEmail = findViewById(R.id.etEmail);
-        btnSaveChanges = findViewById(R.id.btnSaveChanges);
-        txtChangePassword = findViewById(R.id.txtChangePassword);
-    }
+
 
     private void setupToolbar() {
-        toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolBar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

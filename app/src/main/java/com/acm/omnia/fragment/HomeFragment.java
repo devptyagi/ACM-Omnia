@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.acm.omnia.Model.Blog;
 import com.acm.omnia.R;
 import com.acm.omnia.adapter.BlogAdapter;
+import com.acm.omnia.databinding.FragmentHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -43,51 +44,36 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
         // Required empty public constructor
     }
 
+    FragmentHomeBinding binding;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     RecyclerView.LayoutManager layoutManager;
-    Toolbar toolbar;
     DrawerLayout drawerLayout;
     BlogAdapter recyclerAdapter;
-    RecyclerView recyclerView;
     ArrayList<Blog> blogList = new ArrayList<>();
-    RelativeLayout progressLayout;
-    LinearLayout shareAppCard;
     String shareLink;
     String shareMsg;
-    TextView oneName, oneUserName, oneRating, twoName, twoUserName, twoRating, threeName, threeUserName, threeRating;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView = view.findViewById(R.id.recycler_blogs);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+
         layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
         drawerLayout = getActivity().findViewById(R.id.drawer_layout);
-        toolbar = view.findViewById(R.id.toolBar);
-        oneName = view.findViewById(R.id.oneName);
-        twoName = view.findViewById(R.id.twoName);
-        threeName = view.findViewById(R.id.threeName);
-        oneUserName = view.findViewById(R.id.oneUserName);
-        twoUserName = view.findViewById(R.id.twoUserName);
-        threeUserName = view.findViewById(R.id.threeUserName);
-        oneRating = view.findViewById(R.id.oneRating);
-        twoRating = view.findViewById(R.id.twoRating);
-        threeRating = view.findViewById(R.id.threeRating);
-        progressLayout = view.findViewById(R.id.progressLayout);
-        progressLayout.setVisibility(View.VISIBLE);
-        shareAppCard = view.findViewById(R.id.shareAppCard);
-        shareAppCard.setOnClickListener(new View.OnClickListener() {
+        binding.shareAppCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shareApp();
             }
         });
         MultiSnapHelper multiSnapHelper = new MultiSnapHelper(SnapGravity.START, 1, 50);
-        multiSnapHelper.attachToRecyclerView(recyclerView);
+        multiSnapHelper.attachToRecyclerView( binding.recyclerBlogs);
         setupToolbar();
         fetchData();
         setupLeaderBoard();
         fetchShareUrl();
-        return view;
+        return binding.getRoot();
     }
 
     private void fetchShareUrl() {
@@ -128,16 +114,16 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                oneName.setText(document.getString("one"));
-                                twoName.setText(document.getString("two"));
-                                threeName.setText(document.getString("three"));
-                                oneUserName.setText(document.getString("oneUserName"));
-                                twoUserName.setText(document.getString("twoUserName"));
-                                threeUserName.setText(document.getString("threeUserName"));
-                                oneRating.setText(document.getString("oneRating"));
-                                twoRating.setText(document.getString("twoRating"));
-                                threeRating.setText(document.getString("threeRating"));
-                                progressLayout.setVisibility(View.GONE);
+                                binding.oneName.setText(document.getString("one"));
+                                binding.twoName.setText(document.getString("two"));
+                                binding.threeName.setText(document.getString("three"));
+                                binding.oneUserName.setText(document.getString("oneUserName"));
+                                binding.twoUserName.setText(document.getString("twoUserName"));
+                                binding.threeUserName.setText(document.getString("threeUserName"));
+                                binding.oneRating.setText(document.getString("oneRating"));
+                                binding.twoRating.setText(document.getString("twoRating"));
+                                binding.threeRating.setText(document.getString("threeRating"));
+                                binding.progressLayout.setVisibility(View.GONE);
                             }
                         } else {
                             Toast.makeText(getActivity(), "Some error occurred", Toast.LENGTH_SHORT).show();
@@ -147,7 +133,7 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
     }
 
     private void setupToolbar() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(Color.parseColor("#FFFFFF"));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -165,8 +151,8 @@ public class HomeFragment extends Fragment implements BlogAdapter.OnBlogClickedL
                                 blogList.add(blog);
                             }
                             recyclerAdapter = new BlogAdapter(blogList, HomeFragment.this);
-                            recyclerView.setAdapter(recyclerAdapter);
-                            recyclerView.setLayoutManager(layoutManager);
+                            binding.recyclerBlogs.setAdapter(recyclerAdapter);
+                            binding.recyclerBlogs.setLayoutManager(layoutManager);
                         } else {
                             Toast.makeText(getActivity(), "Some Error Occurred!", Toast.LENGTH_SHORT).show();
                         }

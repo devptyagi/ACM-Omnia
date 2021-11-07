@@ -15,21 +15,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.ActivitySplashBinding;
 import com.acm.omnia.util.ConnectionManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity extends AppCompatActivity {
 
+    ActivitySplashBinding binding;
+
     private FirebaseAuth mAuth;
-    ConstraintLayout constraintLayout;
-    ImageView imgLogo;
-    TextView txtOmnia;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         ConnectionManager connectionManager = new ConnectionManager();
         if(!connectionManager.checkConnectivity(SplashActivity.this)) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(SplashActivity.this);
@@ -52,35 +54,32 @@ public class SplashActivity extends AppCompatActivity {
             dialog.create();
             dialog.show();
         } else {
-            constraintLayout = findViewById(R.id.layour_splash);
-            constraintLayout.setBackgroundResource(R.drawable.loader_1);
-            imgLogo = findViewById(R.id.imgLogo);
-            txtOmnia = findViewById(R.id.txtOmnia);
-            imgLogo.setVisibility(View.GONE);
-            txtOmnia.setVisibility(View.GONE);
+
+            binding.imgLogo.setVisibility(View.GONE);
+            binding.txtOmnia.setVisibility(View.GONE);
             mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentUser = mAuth.getCurrentUser();
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    constraintLayout.setBackgroundResource(R.drawable.loader_2);
+                    binding.layoutSplash.setBackgroundResource(R.drawable.loader_2);
                 }
             }, 500);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    constraintLayout.setBackgroundResource(R.drawable.loader_3);
+                    binding.layoutSplash.setBackgroundResource(R.drawable.loader_3);
                 }
             }, 1000);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    constraintLayout.setBackgroundResource(R.drawable.loader_4);
-                    imgLogo.setVisibility(View.VISIBLE);
-                    txtOmnia.setVisibility(View.VISIBLE);
+                    binding.layoutSplash.setBackgroundResource(R.drawable.loader_4);
+                    binding.imgLogo.setVisibility(View.VISIBLE);
+                    binding.txtOmnia.setVisibility(View.VISIBLE);
                 }
             }, 1600);
 

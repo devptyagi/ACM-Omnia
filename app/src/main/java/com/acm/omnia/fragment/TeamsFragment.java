@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.acm.omnia.R;
+import com.acm.omnia.databinding.FragmentTeamsBinding;
 
 public class TeamsFragment extends Fragment {
 
@@ -21,28 +22,28 @@ public class TeamsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    Toolbar toolbar;
+    FragmentTeamsBinding binding;
+
+
     DrawerLayout drawerLayout;
-    Button btnDoubt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_teams, container, false);
+        binding = FragmentTeamsBinding.inflate(inflater, container, false);
         drawerLayout = getActivity().findViewById(R.id.drawer_layout);
-        toolbar = view.findViewById(R.id.toolBar);
-        btnDoubt = view.findViewById(R.id.btnDoubt);
-        btnDoubt.setOnClickListener(new View.OnClickListener() {
+
+        binding.btnDoubt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ForumFragment()).commit();
             }
         });
         setupToolbar();
-        return view;
+        return binding.getRoot();
     }
 
     private void setupToolbar() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(Color.parseColor("#FFFFFF"));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();

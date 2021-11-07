@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/signin_bg"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.AdminActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,17 +22,15 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_marginHorizontal="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/etLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.839">
+        app:layout_constraintStart_toStartOf="parent">
 
         <EditText
-            android:id="@+id/txtEmail"
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
@@ -46,7 +44,7 @@
             android:textCursorDrawable="@null" />
 
         <EditText
-            android:id="@+id/txtPass"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginVertical="5dp"
@@ -59,20 +57,32 @@
             android:paddingStart="15dp"
             android:textCursorDrawable="@null" />
 
+        <TextView
+            android:id="@+id/tyAttemptsinfo"
+            android:layout_width="229dp"
+            android:layout_height="53dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="15dp"
+            android:text="Number of attempts left: 5"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
+
     <TextView
-        android:id="@+id/btnLogin"
+        android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginBottom="72dp"
         android:layout_marginHorizontal="70dp"
+        android:layout_marginBottom="68dp"
         android:background="@drawable/btn_bg"
-        android:fontFamily="@font/codec_cold_trial"
+        android:fontFamily="@font/montserrat_regular"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:paddingTop="10dp"
-        android:text="LOGIN"
+        android:paddingTop="1dp"
+        android:text="LOGIN AS ADMIN"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -81,38 +91,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/txtRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Not a member? Register!"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-    <TextView
-        android:id="@+id/txtAdminLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_medium"
-        android:text="Login as Admin!!"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
-
-    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="316dp"
-        android:fontFamily="@font/montserrat_bold"
+        android:fontFamily="@font/montserrat_regular"
         android:letterSpacing="0.50"
         android:lineHeight="44sp"
         android:text="OMNIA"
@@ -122,5 +105,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
