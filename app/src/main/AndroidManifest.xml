@@ -31,7 +31,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        </activity>
         <service
             android:name="com.google.firebase.messaging.FirebaseMessagingService"
             android:exported="false">

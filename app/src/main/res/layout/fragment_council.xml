@@ -250,6 +250,38 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="start">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgTechnicalHead"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:src="@drawable/blug_council" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Technical Head"
+                        android:layout_alignParentBottom="true"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="bottom"
+                        android:textSize="18sp"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/montserrat_medium" />
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_alignEnd="@id/imgTechnicalHead"
+                        android:src="@drawable/ring"/>
+
+                </RelativeLayout>
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

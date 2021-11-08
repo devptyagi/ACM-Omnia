@@ -30,7 +30,7 @@ public class CouncilFragment extends Fragment {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ImageView imgChair, imgViceChair, imgSecretary, imgTreasurer, imgWebmaster, imgMemberChair;
+    ImageView imgChair, imgViceChair, imgSecretary, imgTreasurer, imgWebmaster, imgMemberChair, imgTechnicalHead;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class CouncilFragment extends Fragment {
         imgTreasurer = view.findViewById(R.id.imgTreasurer);
         imgWebmaster = view.findViewById(R.id.imgWebmaster);
         imgMemberChair = view.findViewById(R.id.imgMemberChair);
+        imgTechnicalHead = view.findViewById(R.id.imgTechnicalHead);
         setupToolbar();
         setupCouncilImages();
         return view;
@@ -62,6 +63,7 @@ public class CouncilFragment extends Fragment {
                         Picasso.get().load(document.getString("treasurer")).into(imgTreasurer);
                         Picasso.get().load(document.getString("webmaster")).into(imgWebmaster);
                         Picasso.get().load(document.getString("secretary")).into(imgSecretary);
+                        Picasso.get().load(document.getString("technicalHead")).into(imgTechnicalHead);
                     }
                 }
             }
