@@ -2,6 +2,8 @@
 The official android app for <a href="http://juit.acm.org/">ACM Student Chapter JUIT</a>    
 Download ACM Omnia from <a href="https://github.com/devptyagi/ACM-Omnia/releases/download/v1.1/ACMOmnia_v1.1.apk"> here </a>
 
+**Note**: This app is no longer maintained.
+
 [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
